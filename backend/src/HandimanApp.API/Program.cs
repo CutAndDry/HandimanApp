@@ -110,6 +110,18 @@ app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Root endpoint
+app.MapGet("/", () => new { 
+    message = "HandimanApp API", 
+    version = "1.0",
+    docs = "/swagger",
+    status = "running"
+});
+
+// Health check
+app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
+
 app.MapControllers();
 
 // Database migration
