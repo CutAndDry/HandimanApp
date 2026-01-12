@@ -6,7 +6,7 @@ using Serilog;
 using System.Text;
 using HandimanApp.Infrastructure.Data;
 
-var builder = WebApplicationBuilder.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -94,7 +94,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-var app = builder.CreateBuilder();
+var app = builder.Build();
 
 // Configure middleware
 if (app.Environment.IsDevelopment())

@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 
-const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'
+const API_BASE_URL = (import.meta.env as any).REACT_APP_API_BASE_URL || 'http://localhost:5000'
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
