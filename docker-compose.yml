@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: handiman_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-handiman_app}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - handiman-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: handiman_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - handiman-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: handiman_api
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENV:-Development}
+      ConnectionStrings__DefaultConnection: "Host=postgres;Database=${DB_NAME:-handiman_app};Username=${DB_USER:-postgres};Password=${DB_PASSWORD:-postgres}"
+      Jwt__SecretKey: ${JWT_SECRET_KEY:-your-secret-key-change-in-production-min-32-chars}
+      Jwt__Issuer: ${JWT_ISSUER:-handiman-app}
+      Jwt__Audience: ${JWT_AUDIENCE:-handiman-app-users}
+      Jwt__ExpirationMinutes: ${JWT_EXPIRATION:-1440}
+      Redis__ConnectionString: "redis:6379"
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    networks:
+      - handiman-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: handiman_web
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_BASE_URL: "http://localhost:5000"
+      REACT_APP_ENV: "development"
+    depends_on:
+      - backend
+    networks:
+      - handiman-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  handiman-network:
+    driver: bridge

@@ -1,0 +1,56 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F57642F3-C37C-D174-720E-6A6AAD5BEE22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandimanApp.Tests", "backend\tests\HandimanApp.Tests.csproj", "{CA13012C-B707-B44E-502D-8808BDEBF10A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0F9113EE-888A-26D2-68B0-4A7D0A2A8745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandimanApp.API", "backend\src\HandimanApp.API\HandimanApp.API.csproj", "{FBAAD29E-FF09-15E6-EE66-5DB2393C959F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandimanApp.Core", "backend\src\HandimanApp.Core\HandimanApp.Core.csproj", "{AE8B68FA-1C76-2E67-9F61-D4A590072046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandimanApp.Infrastructure", "backend\src\HandimanApp.Infrastructure\HandimanApp.Infrastructure.csproj", "{A1CA7C4F-8D81-5924-3540-759E933489AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA13012C-B707-B44E-502D-8808BDEBF10A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA13012C-B707-B44E-502D-8808BDEBF10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA13012C-B707-B44E-502D-8808BDEBF10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA13012C-B707-B44E-502D-8808BDEBF10A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAAD29E-FF09-15E6-EE66-5DB2393C959F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAAD29E-FF09-15E6-EE66-5DB2393C959F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAAD29E-FF09-15E6-EE66-5DB2393C959F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAAD29E-FF09-15E6-EE66-5DB2393C959F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE8B68FA-1C76-2E67-9F61-D4A590072046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE8B68FA-1C76-2E67-9F61-D4A590072046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE8B68FA-1C76-2E67-9F61-D4A590072046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE8B68FA-1C76-2E67-9F61-D4A590072046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CA7C4F-8D81-5924-3540-759E933489AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CA7C4F-8D81-5924-3540-759E933489AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CA7C4F-8D81-5924-3540-759E933489AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CA7C4F-8D81-5924-3540-759E933489AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F57642F3-C37C-D174-720E-6A6AAD5BEE22} = {1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}
+		{CA13012C-B707-B44E-502D-8808BDEBF10A} = {F57642F3-C37C-D174-720E-6A6AAD5BEE22}
+		{0F9113EE-888A-26D2-68B0-4A7D0A2A8745} = {1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}
+		{FBAAD29E-FF09-15E6-EE66-5DB2393C959F} = {0F9113EE-888A-26D2-68B0-4A7D0A2A8745}
+		{AE8B68FA-1C76-2E67-9F61-D4A590072046} = {0F9113EE-888A-26D2-68B0-4A7D0A2A8745}
+		{A1CA7C4F-8D81-5924-3540-759E933489AF} = {0F9113EE-888A-26D2-68B0-4A7D0A2A8745}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FA62616-0AC9-4A64-8F58-82557D448DED}
+	EndGlobalSection
+EndGlobal
