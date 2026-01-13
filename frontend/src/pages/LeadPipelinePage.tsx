@@ -26,8 +26,14 @@ export default function LeadPipelinePage() {
   const [loading, setLoading] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [showForm, setShowForm] = useState(false);
+  
+  // Get accountId from user object
+  const userStr = localStorage.getItem('user');
+  const currentUser = userStr ? JSON.parse(userStr) : null;
+  const accountId = currentUser?.id || '';
+  
   const [formData, setFormData] = useState({
-    accountId: localStorage.getItem('accountId') || '',
+    accountId: accountId,
     customerId: '',
     leadSource: 'website',
     estimatedValue: '',
@@ -40,7 +46,17 @@ export default function LeadPipelinePage() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const accountId = localStorage.getItem('accountId');
+      // Get accountId from user object in localStorage
+      const userStr = localStorage.getItem('user');
+      const user = userStr ? JSON.parse(userStr) : null;
+      const accountId = user?.id;
+      
+      if (!accountId) {
+        console.warn('No accountId found in user object');
+        setLeads([]);
+        setLoading(false);
+        return;
+      }
       const token = localStorage.getItem('token');
       const statusParam = selectedStatus !== 'all' ? `&status=${selectedStatus}` : '';
       const res = await fetch(
@@ -49,17 +65,32 @@ export default function LeadPipelinePage() {
           headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
+      if (!res.ok) {
+        console.error(`API Error: ${res.status} ${res.statusText}`);
+        setLeads([]);
+        setLoading(false);
+        return;
+      }
       const data = await res.json();
-      setLeads(data);
+      setLeads(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Error fetching leads:', error);
+      setLeads([]);
     }
     setLoading(false);
   };
 
   const fetchSummary = async () => {
     try {
-      const accountId = localStorage.getItem('accountId');
+      // Get accountId from user object in localStorage
+      const userStr = localStorage.getItem('user');
+      const user = userStr ? JSON.parse(userStr) : null;
+      const accountId = user?.id;
+      
+      if (!accountId) {
+        console.warn('No accountId found in user object');
+        return;
+      }
       const token = localStorage.getItem('token');
       const res = await fetch(
         `http://localhost:5000/api/leads/dashboard/summary?accountId=${accountId}`,
@@ -67,10 +98,16 @@ export default function LeadPipelinePage() {
           headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
+      if (!res.ok) {
+        console.error(`API Error: ${res.status} ${res.statusText}`);
+        setSummary(null);
+        return;
+      }
       const data = await res.json();
-      setSummary(data);
+      setSummary(data || { total_leads: 0, new_leads: 0, contacted: 0, quoted: 0, won: 0, lost: 0, total_value: 0 });
     } catch (error) {
       console.error('Error fetching summary:', error);
+      setSummary(null);
     }
   };
 
@@ -98,7 +135,7 @@ export default function LeadPipelinePage() {
       });
       if (res.ok) {
         setFormData({
-          accountId: localStorage.getItem('accountId') || '',
+          accountId: accountId,
           customerId: '',
           leadSource: 'website',
           estimatedValue: '',
@@ -152,7 +189,7 @@ export default function LeadPipelinePage() {
           <div className="bg-purple-50 p-4 rounded-lg">
             <p className="text-gray-600 text-sm">Pipeline Value</p>
             <p className="text-3xl font-bold text-purple-600">
-              ${summary.total_value.toLocaleString()}
+              ${summary.total_value ? summary.total_value.toLocaleString() : '0'}
             </p>
           </div>
         </div>
