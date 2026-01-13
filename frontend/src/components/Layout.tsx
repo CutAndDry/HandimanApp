@@ -119,6 +119,23 @@ const Layout: React.FC = () => {
                 <Icons.MessageSquare className="nav-icon" />
                 <span className="nav-text">Messages</span>
               </Link>
+
+              {/* Phase 5 Features */}
+              <div className="nav-divider">
+                <span className="nav-divider-text">Phase 5</span>
+              </div>
+              <Link to="/time-entries" className={`nav-item ${isActive('/time-entries') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Clock className="nav-icon" />
+                <span className="nav-text">Time Entries</span>
+              </Link>
+              <Link to="/photos" className={`nav-item ${isActive('/photos') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Camera className="nav-icon" />
+                <span className="nav-text">Job Photos</span>
+              </Link>
+              <Link to="/inventory" className={`nav-item ${isActive('/inventory') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Package className="nav-icon" />
+                <span className="nav-text">Inventory</span>
+              </Link>
               
               <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Settings className="nav-icon" />

@@ -23,6 +23,9 @@ import { JobCostingPage } from './pages/JobCostingPage'
 import NotificationsPage from './pages/NotificationsPage'
 import ReviewsPage from './pages/ReviewsPage'
 import ChatPage from './pages/ChatPage'
+import TimeEntriesPage from './pages/TimeEntriesPage'
+import PhotosPage from './pages/PhotosPage'
+import InventoryPage from './pages/InventoryPage'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -52,6 +55,9 @@ function App() {
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/messages" element={<ChatPage />} />
+            <Route path="/time-entries" element={<TimeEntriesPage />} />
+            <Route path="/photos" element={<PhotosPage />} />
+            <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           
