@@ -47,8 +47,10 @@ export interface RecordPaymentRequest {
 
 export const invoiceService = {
   // Get all invoices
-  async getInvoices() {
-    const response = await api.get('/api/invoices');
+  async getInvoices(status?: string, search?: string, limit: number = 50, offset: number = 0) {
+    const response = await api.get('/api/invoices', {
+      params: { status, search, limit, offset },
+    });
     return response.data;
   },
 

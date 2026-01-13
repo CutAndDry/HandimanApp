@@ -39,8 +39,10 @@ export interface UpdateCustomerRequest {
 
 export const customerService = {
   // Get all customers
-  async getCustomers() {
-    const response = await api.get('/api/customers');
+  async getCustomers(search: string = '', limit: number = 100, offset: number = 0) {
+    const response = await api.get('/api/customers', {
+      params: { search, limit, offset },
+    });
     return response.data;
   },
 
