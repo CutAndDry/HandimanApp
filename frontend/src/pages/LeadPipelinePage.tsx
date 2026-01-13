@@ -41,9 +41,13 @@ export default function LeadPipelinePage() {
     setLoading(true);
     try {
       const accountId = localStorage.getItem('accountId');
+      const token = localStorage.getItem('token');
       const statusParam = selectedStatus !== 'all' ? `&status=${selectedStatus}` : '';
       const res = await fetch(
-        `http://localhost:5000/api/leads?accountId=${accountId}&limit=50${statusParam}`
+        `http://localhost:5000/api/leads?accountId=${accountId}&limit=50${statusParam}`,
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
+        }
       );
       const data = await res.json();
       setLeads(data);
@@ -56,8 +60,12 @@ export default function LeadPipelinePage() {
   const fetchSummary = async () => {
     try {
       const accountId = localStorage.getItem('accountId');
+      const token = localStorage.getItem('token');
       const res = await fetch(
-        `http://localhost:5000/api/leads/dashboard/summary?accountId=${accountId}`
+        `http://localhost:5000/api/leads/dashboard/summary?accountId=${accountId}`,
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
+        }
       );
       const data = await res.json();
       setSummary(data);
@@ -79,9 +87,13 @@ export default function LeadPipelinePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch('http://localhost:5000/api/leads', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        },
         body: JSON.stringify(formData)
       });
       if (res.ok) {
