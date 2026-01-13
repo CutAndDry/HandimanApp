@@ -57,13 +57,6 @@ const CalendarPage: React.FC = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
   };
 
-  const statusColors: { [key: string]: string } = {
-    lead: 'bg-gray-200 text-gray-800',
-    pending: 'bg-yellow-200 text-yellow-800',
-    in_progress: 'bg-blue-200 text-blue-800',
-    completed: 'bg-green-200 text-green-800',
-  };
-
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'

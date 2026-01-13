@@ -284,7 +284,7 @@ const InvoicesPage: React.FC = () => {
                       ? 'bg-blue-600' 
                       : 'bg-yellow-600'
                 }`}>
-                  {invoice.status.toUpperCase()}
+                  {(invoice.status || 'pending').toUpperCase()}
                 </span>
                 <span className="text-xs sm:text-sm text-gray-600">
                   Due: {new Date(invoice.dueDate || '').toLocaleDateString()}
@@ -299,7 +299,7 @@ const InvoicesPage: React.FC = () => {
                   💳 Record Payment
                 </button>
                 <button
-                  onClick={() => handleDownloadPdf(invoice.id!, invoice.invoiceNumber)}
+                  onClick={() => handleDownloadPdf(invoice.id!, invoice.invoiceNumber || 'unknown')}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-lg transition text-sm"
                 >
                   📥 Download PDF

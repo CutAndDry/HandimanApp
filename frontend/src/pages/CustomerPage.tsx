@@ -8,14 +8,14 @@ const CustomerPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Customer>>({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     address: '',
     city: '',
     state: '',
     postalCode: '',
-    notes: '',
   });
 
   useEffect(() => {
@@ -44,10 +44,21 @@ const CustomerPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const requestData = {
+        firstName: formData.firstName || '',
+        lastName: formData.lastName || '',
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        postalCode: formData.postalCode,
+      };
+
       if (editingId) {
-        await customerService.updateCustomer(editingId, formData);
+        await customerService.updateCustomer(editingId, requestData);
       } else {
-        await customerService.createCustomer(formData);
+        await customerService.createCustomer(requestData);
       }
       resetForm();
       await fetchCustomers();
@@ -76,14 +87,14 @@ const CustomerPage: React.FC = () => {
   const resetForm = () => {
     setEditingId(null);
     setFormData({
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
-      phone: '',
+      phoneNumber: '',
       address: '',
       city: '',
       state: '',
       postalCode: '',
-      notes: '',
     });
   };
 
@@ -118,26 +129,37 @@ const CustomerPage: React.FC = () => {
               {editingId ? '✏️ Edit Customer' : '➕ New Customer'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="John Doe"
-                  value={formData.name || ''}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                />
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">First Name *</label>
+                  <input
+                    type="text"
+                    value={formData.firstName || ''}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    placeholder="John"
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+                  <input
+                    type="text"
+                    value={formData.lastName || ''}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    placeholder="Doe"
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                  />
+                </div>
               </div>
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input
                   type="email"
-                  name="email"
-                  placeholder="john@example.com"
                   value={formData.email || ''}
-                  onChange={handleInputChange}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="john@example.com"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
@@ -145,10 +167,9 @@ const CustomerPage: React.FC = () => {
                 <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Phone</label>
                 <input
                   type="tel"
-                  name="phone"
+                  value={formData.phoneNumber || ''}
+                  onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                   placeholder="(555) 123-4567"
-                  value={formData.phone || ''}
-                  onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
@@ -156,10 +177,9 @@ const CustomerPage: React.FC = () => {
                 <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Address</label>
                 <input
                   type="text"
-                  name="address"
-                  placeholder="123 Main St"
                   value={formData.address || ''}
-                  onChange={handleInputChange}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  placeholder="123 Main St"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
@@ -168,10 +188,9 @@ const CustomerPage: React.FC = () => {
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">City</label>
                   <input
                     type="text"
-                    name="city"
                     placeholder="New York"
                     value={formData.city || ''}
-                    onChange={handleInputChange}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                 </div>
@@ -179,13 +198,22 @@ const CustomerPage: React.FC = () => {
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">State</label>
                   <input
                     type="text"
-                    name="state"
                     placeholder="NY"
                     value={formData.state || ''}
-                    onChange={handleInputChange}
+                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                 </div>
+              </div>
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Postal Code</label>
+                <input
+                  type="text"
+                  placeholder="10001"
+                  value={formData.postalCode || ''}
+                  onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                />
               </div>
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
@@ -196,17 +224,6 @@ const CustomerPage: React.FC = () => {
                   value={formData.postalCode || ''}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Notes</label>
-                <textarea
-                  name="notes"
-                  placeholder="Additional notes..."
-                  value={formData.notes || ''}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                  rows={3}
                 />
               </div>
               <div className="flex gap-2 pt-2">
@@ -254,13 +271,13 @@ const CustomerPage: React.FC = () => {
                     {customers.map((customer) => (
                       <tr key={customer.id} className="border-b hover:bg-gray-50 transition block sm:table-row mb-4 sm:mb-0">
                         <td className="px-4 sm:px-6 py-3 font-medium text-gray-900 before:content-['Name: '] sm:before:content-none text-xs sm:text-sm block sm:table-cell">
-                          {customer.name}
+                          {customer.firstName} {customer.lastName}
                         </td>
                         <td className="px-4 sm:px-6 py-3 text-gray-600 before:content-['Email: '] sm:before:content-none text-xs sm:text-sm block sm:table-cell">
                           {customer.email || '-'}
                         </td>
                         <td className="px-4 sm:px-6 py-3 text-gray-600 before:content-['Phone: '] sm:before:content-none text-xs sm:text-sm block sm:table-cell">
-                          {customer.phone || '-'}
+                          {customer.phoneNumber || '-'}
                         </td>
                         <td className="px-4 sm:px-6 py-3 text-gray-600 before:content-['City: '] sm:before:content-none text-xs sm:text-sm block sm:table-cell">
                           {customer.city || '-'}

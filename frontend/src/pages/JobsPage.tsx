@@ -62,7 +62,7 @@ const JobsPage: React.FC = () => {
 
   const handleStatusChange = async (jobId: string, newStatus: string) => {
     try {
-      await jobService.updateJobStatus(jobId, newStatus)
+      await jobService.updateJob(jobId, { status: newStatus })
       fetchJobs()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update job')
@@ -77,7 +77,7 @@ const JobsPage: React.FC = () => {
       job.description || '',
       job.location || '',
       job.status,
-      job.laborHours || ''
+      job.estimatedLaborHours || ''
     ])
     const csvContent = [
       headers.join(','),
@@ -267,7 +267,7 @@ const JobsPage: React.FC = () => {
                   <p className="text-gray-600 text-sm mt-1 line-clamp-2">{job.description}</p>
                   <div className="flex flex-col sm:flex-row sm:gap-4 mt-3 text-xs sm:text-sm text-gray-500">
                     <span>📍 {job.location || 'No location'}</span>
-                    {job.laborHours && <span>⏱️ {job.laborHours.toFixed(1)} hours</span>}
+                    {job.actualLaborHours && <span>⏱️ {job.actualLaborHours.toFixed(1)} hours</span>}
                   </div>
                 </div>
                 <select

@@ -9,7 +9,6 @@ const JobDetailPage: React.FC = () => {
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isEditing, setIsEditing] = useState(false);
   const [timer, setTimer] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [materialForm, setMaterialForm] = useState({
@@ -28,13 +27,13 @@ const JobDetailPage: React.FC = () => {
   }, [id]);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let timerInterval: ReturnType<typeof setInterval>;
     if (timerRunning) {
-      interval = setInterval(() => {
+      timerInterval = setInterval(() => {
         setTimer(t => t + 1);
       }, 1000);
     }
-    return () => clearInterval(interval);
+    return () => clearInterval(timerInterval);
   }, [timerRunning]);
 
   const fetchJob = async () => {
@@ -86,7 +85,7 @@ const JobDetailPage: React.FC = () => {
     if (!job) return;
     const hours = timer / 3600;
     try {
-      await jobService.updateJob(job.id, { ...job, laborHours: hours });
+      await jobService.updateJob(job.id, { actualLaborHours: hours });
       setTimer(0);
       setTimerRunning(false);
       await fetchJob();
@@ -125,13 +124,6 @@ const JobDetailPage: React.FC = () => {
       </div>
     );
   }
-
-  const jobStatusColors: { [key: string]: string } = {
-    lead: 'bg-gray-100 text-gray-800',
-    in_progress: 'bg-blue-100 text-blue-800',
-    completed: 'bg-green-100 text-green-800',
-    pending: 'bg-yellow-100 text-yellow-800',
-  };
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -184,10 +176,6 @@ const JobDetailPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div>
-                <p className="text-xs font-semibold text-gray-600 uppercase mb-1">Customer</p>
-                <p className="text-base sm:text-lg font-semibold text-gray-900">{job.customerName || 'N/A'}</p>
-              </div>
               <div>
                 <p className="text-xs font-semibold text-gray-600 uppercase mb-1">Job Type</p>
                 <p className="text-base sm:text-lg font-semibold text-gray-900">{job.jobType || 'N/A'}</p>
@@ -359,7 +347,7 @@ const JobDetailPage: React.FC = () => {
 
             <div className="bg-gray-50 p-3 sm:p-4 rounded-lg border border-gray-200">
               <p className="text-xs font-semibold text-gray-600 uppercase mb-1">Total Logged</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{job.laborHours?.toFixed(2) || '0.00'} <span className="text-xs sm:text-sm text-gray-600">hrs</span></p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{job.actualLaborHours?.toFixed(2) || '0.00'} <span className="text-xs sm:text-sm text-gray-600">hrs</span></p>
             </div>
           </div>
 

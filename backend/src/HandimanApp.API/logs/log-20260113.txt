@@ -3282,3 +3282,189 @@ SELECT EXISTS (
     WHERE n.nspname='public' AND
           c.relname='__EFMigrationsHistory'
 )
+2026-01-13 14:11:42.704 +02:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2026-01-13 14:11:42.831 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2026-01-13 14:11:43.118 +02:00 [DBG] The index {'AccountId'} was not created on entity type 'TeamMember' as the properties are already covered by the index {'AccountId', 'UserId'}.
+2026-01-13 14:11:43.305 +02:00 [DBG] Entity Framework Core 8.0.0 initialized 'ApplicationDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:8.0.0+2539d1f4bd0d429cbae20336d531d14938a54297' with options: None
+2026-01-13 14:11:43.313 +02:00 [DBG] Creating DbConnection.
+2026-01-13 14:11:43.328 +02:00 [DBG] Created DbConnection. (14ms).
+2026-01-13 14:11:43.333 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.405 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.407 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.413 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (4ms).
+2026-01-13 14:11:43.416 +02:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2026-01-13 14:11:43.420 +02:00 [DBG] Created DbCommand for 'ExecuteScalar' (2ms).
+2026-01-13 14:11:43.422 +02:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (5ms).
+2026-01-13 14:11:43.423 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.461 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.466 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-01-13 14:11:43.506 +02:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-01-13 14:11:43.508 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.509 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (1ms).
+2026-01-13 14:11:43.520 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.521 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.522 +02:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2026-01-13 14:11:43.522 +02:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2026-01-13 14:11:43.523 +02:00 [DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+2026-01-13 14:11:43.524 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-01-13 14:11:43.527 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-01-13 14:11:43.532 +02:00 [DBG] Closing data reader to 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.534 +02:00 [DBG] A data reader for 'handiman_app' on server 'tcp://localhost:5432' is being disposed after spending 4ms reading results.
+2026-01-13 14:11:43.535 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.536 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.537 +02:00 [DBG] Migrating using database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.538 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.563 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.563 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.564 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.565 +02:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2026-01-13 14:11:43.566 +02:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2026-01-13 14:11:43.566 +02:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (1ms).
+2026-01-13 14:11:43.567 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.568 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.569 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-01-13 14:11:43.570 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-01-13 14:11:43.572 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.572 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.573 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.709 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.709 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.710 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.711 +02:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2026-01-13 14:11:43.712 +02:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2026-01-13 14:11:43.713 +02:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (1ms).
+2026-01-13 14:11:43.713 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.714 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.715 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-01-13 14:11:43.716 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-01-13 14:11:43.718 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.718 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.719 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.720 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.721 +02:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2026-01-13 14:11:43.721 +02:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2026-01-13 14:11:43.722 +02:00 [DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+2026-01-13 14:11:43.723 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-01-13 14:11:43.724 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-01-13 14:11:43.726 +02:00 [DBG] Closing data reader to 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.726 +02:00 [DBG] A data reader for 'handiman_app' on server 'tcp://localhost:5432' is being disposed after spending 0ms reading results.
+2026-01-13 14:11:43.727 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.728 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.735 +02:00 [INF] No migrations were applied. The database is already up to date.
+2026-01-13 14:11:43.736 +02:00 [INF] Database migrated successfully
+2026-01-13 14:11:43.754 +02:00 [DBG] Compiling query expression: 
+'DbSet<User>()
+    .Any(u => u.Email == "test@handiman.app")'
+2026-01-13 14:11:43.856 +02:00 [DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<bool>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Users AS u
+            WHERE u.Email == 'test@handiman.app')), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, bool>, 
+    HandimanApp.Infrastructure.Data.ApplicationDbContext, 
+    False, 
+    False, 
+    True
+)
+    .Single()'
+2026-01-13 14:11:43.870 +02:00 [DBG] Opening connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.871 +02:00 [DBG] Opened connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.872 +02:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2026-01-13 14:11:43.873 +02:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2026-01-13 14:11:43.873 +02:00 [DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+2026-01-13 14:11:43.874 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u
+    WHERE u."Email" = 'test@handiman.app')
+2026-01-13 14:11:43.877 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS u
+    WHERE u."Email" = 'test@handiman.app')
+2026-01-13 14:11:43.880 +02:00 [DBG] Closing data reader to 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.881 +02:00 [DBG] A data reader for 'handiman_app' on server 'tcp://localhost:5432' is being disposed after spending 3ms reading results.
+2026-01-13 14:11:43.882 +02:00 [DBG] Closing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.883 +02:00 [DBG] Closed connection to database 'handiman_app' on server 'tcp://localhost:5432' (0ms).
+2026-01-13 14:11:43.884 +02:00 [DBG] 'ApplicationDbContext' disposed.
+2026-01-13 14:11:43.886 +02:00 [DBG] Disposing connection to database 'handiman_app' on server 'tcp://localhost:5432'.
+2026-01-13 14:11:43.887 +02:00 [DBG] Disposed connection to database 'handiman_app' on server 'tcp://localhost:5432' (1ms).
+2026-01-13 14:11:43.890 +02:00 [DBG] Hosting starting
+2026-01-13 14:11:43.898 +02:00 [INF] User profile is available. Using 'C:\Users\marku\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-01-13 14:11:43.904 +02:00 [DBG] Reading data from file 'C:\Users\marku\AppData\Local\ASP.NET\DataProtection-Keys\key-56b5fa89-2039-4ee0-908c-ad4c49caf0e5.xml'.
+2026-01-13 14:11:43.907 +02:00 [DBG] Reading data from file 'C:\Users\marku\AppData\Local\ASP.NET\DataProtection-Keys\key-786f5c10-e11a-44c9-aa68-9cbc94f17aea.xml'.
+2026-01-13 14:11:43.908 +02:00 [DBG] Reading data from file 'C:\Users\marku\AppData\Local\ASP.NET\DataProtection-Keys\key-88502d16-46bd-4998-ade6-e93bf68fab78.xml'.
+2026-01-13 14:11:43.909 +02:00 [DBG] Reading data from file 'C:\Users\marku\AppData\Local\ASP.NET\DataProtection-Keys\key-e191fa90-a547-4409-982e-f9b9791d5793.xml'.
+2026-01-13 14:11:43.912 +02:00 [DBG] Found key {56b5fa89-2039-4ee0-908c-ad4c49caf0e5}.
+2026-01-13 14:11:43.914 +02:00 [DBG] Found key {786f5c10-e11a-44c9-aa68-9cbc94f17aea}.
+2026-01-13 14:11:43.915 +02:00 [DBG] Found key {88502d16-46bd-4998-ade6-e93bf68fab78}.
+2026-01-13 14:11:43.916 +02:00 [DBG] Found key {e191fa90-a547-4409-982e-f9b9791d5793}.
+2026-01-13 14:11:43.920 +02:00 [DBG] Considering key {88502d16-46bd-4998-ade6-e93bf68fab78} with expiration date 2026-02-06 15:00:04Z as default key.
+2026-01-13 14:11:43.922 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-01-13 14:11:43.923 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-01-13 14:11:43.924 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-01-13 14:11:43.926 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-01-13 14:11:43.928 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-01-13 14:11:43.930 +02:00 [DBG] Using key {88502d16-46bd-4998-ade6-e93bf68fab78} as the default key.
+2026-01-13 14:11:43.931 +02:00 [DBG] Key ring with default key {88502d16-46bd-4998-ade6-e93bf68fab78} was loaded during application startup.
+2026-01-13 14:11:43.961 +02:00 [DBG] No listening endpoints were configured. Binding to http://localhost:5000 by default.
+2026-01-13 14:11:43.962 +02:00 [INF] Now listening on: http://localhost:5000
+2026-01-13 14:11:43.962 +02:00 [DBG] Loaded hosting startup assembly HandimanApp.API
+2026-01-13 14:11:43.963 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-13 14:11:43.964 +02:00 [INF] Hosting environment: Production
+2026-01-13 14:11:43.964 +02:00 [INF] Content root path: C:\Users\marku\HandimanApp\backend\src\HandimanApp.API
+2026-01-13 14:11:43.965 +02:00 [DBG] Hosting started
