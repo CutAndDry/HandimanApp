@@ -153,6 +153,23 @@ const Layout: React.FC = () => {
                 <Icons.BarChart3 className="nav-icon" />
                 <span className="nav-text">Analytics</span>
               </Link>
+
+              {/* Phase 7 Features */}
+              <div className="nav-divider">
+                <span className="nav-divider-text">Phase 7</span>
+              </div>
+              <Link to="/teams" className={`nav-item ${isActive('/teams') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Users className="nav-icon" />
+                <span className="nav-text">Teams</span>
+              </Link>
+              <Link to="/roles" className={`nav-item ${isActive('/roles') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Shield className="nav-icon" />
+                <span className="nav-text">Roles & Permissions</span>
+              </Link>
+              <Link to="/integrations" className={`nav-item ${isActive('/integrations') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Plug className="nav-icon" />
+                <span className="nav-text">Integrations</span>
+              </Link>
               
               <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Settings className="nav-icon" />

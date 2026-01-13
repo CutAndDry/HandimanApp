@@ -29,6 +29,9 @@ import InventoryPage from './pages/InventoryPage'
 import AutomationPage from './pages/AutomationPage'
 import DynamicPricingPage from './pages/DynamicPricingPage'
 import AnalyticsPage from './pages/AnalyticsPage'
+import TeamManagementPage from './pages/TeamManagementPage'
+import RoleHierarchyPage from './pages/RoleHierarchyPage'
+import IntegrationsPage from './pages/IntegrationsPage'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -64,6 +67,9 @@ function App() {
             <Route path="/automation" element={<AutomationPage />} />
             <Route path="/pricing" element={<DynamicPricingPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/teams" element={<TeamManagementPage />} />
+            <Route path="/roles" element={<RoleHierarchyPage />} />
+            <Route path="/integrations" element={<IntegrationsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           

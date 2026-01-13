@@ -170,4 +170,18 @@ export const Icons = {
       <polyline points="17 6 23 6 23 12" />
     </svg>
   ),
+
+  Shield: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  ),
+
+  Plug: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <circle cx="12" cy="2" r="1" />
+      <path d="M5 7c-1.657 0-3 1.343-3 3v1c0 1.657 1.343 3 3 3h1v3c0 1.657 1.343 3 3 3s3-1.343 3-3v-3h2v3c0 1.657 1.343 3 3 3s3-1.343 3-3v-3h1c1.657 0 3-1.343 3-3V10c0-1.657-1.343-3-3-3" />
+      <line x1="12" y1="20" x2="12" y2="23" />
+    </svg>
+  ),
 }
