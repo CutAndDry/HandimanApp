@@ -23,8 +23,9 @@ builder.Host.UseSerilog();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IPdfService, PdfService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
+// PDF and Email services commented out temporarily due to dependency issues
+// builder.Services.AddScoped<IPdfService, PdfService>();
+// builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Add DbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

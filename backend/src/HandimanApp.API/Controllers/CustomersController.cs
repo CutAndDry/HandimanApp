@@ -19,23 +19,50 @@ namespace HandimanApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers(
+            [FromQuery] string? search = null,
+            [FromQuery] int limit = 50,
+            [FromQuery] int offset = 0)
         {
-            // Get the user's account
-            var userIdClaim = User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
-            if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized();
+            try
+            {
+                // Get the user's account
+                var userIdClaim = User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+                if (!Guid.TryParse(userIdClaim, out var userId))
+                    return Unauthorized();
 
-            var account = await _context.Accounts.FirstOrDefaultAsync(a => a.OwnerId == userId);
-            if (account == null)
-                return BadRequest("User does not have an account");
+                var account = await _context.Accounts.FirstOrDefaultAsync(a => a.OwnerId == userId);
+                if (account == null)
+                    return BadRequest("User does not have an account");
 
-            var customers = await _context.Customers
-                .Where(c => c.AccountId == account.Id)
-                .OrderBy(c => c.FirstName)
-                .ToListAsync();
+                var query = _context.Customers
+                    .Where(c => c.AccountId == account.Id)
+                    .AsQueryable();
 
-            return Ok(customers);
+                // Search by name, email, or phone
+                if (!string.IsNullOrEmpty(search))
+                {
+                    var searchLower = search.ToLower();
+                    query = query.Where(c =>
+                        c.FirstName.ToLower().Contains(searchLower) ||
+                        c.LastName.ToLower().Contains(searchLower) ||
+                        c.Email.ToLower().Contains(searchLower) ||
+                        c.PhoneNumber.Contains(search)
+                    );
+                }
+
+                var customers = await query
+                    .OrderBy(c => c.FirstName)
+                    .Skip(offset)
+                    .Take(limit)
+                    .ToListAsync();
+
+                return Ok(customers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Internal server error", message = ex.Message });
+            }
         }
 
         [HttpGet("{id}")]

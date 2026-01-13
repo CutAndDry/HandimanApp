@@ -141,7 +141,7 @@ namespace HandimanApp.API.Controllers
     public class AddTeamMemberRequest
     {
         public Guid UserId { get; set; }
-        public string Role { get; set; }
+        public UserRole Role { get; set; }
         public decimal HourlyRate { get; set; }
     }
 }

@@ -24,20 +24,63 @@ namespace HandimanApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices([FromQuery] Guid? accountId, [FromQuery] string? status)
+        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices(
+            [FromQuery] Guid? accountId = null,
+            [FromQuery] string? status = null,
+            [FromQuery] string? search = null,
+            [FromQuery] DateTime? startDate = null,
+            [FromQuery] DateTime? endDate = null,
+            [FromQuery] int limit = 50,
+            [FromQuery] int offset = 0)
         {
             var query = _context.Invoices
                 .Include(i => i.Customer)
                 .Include(i => i.Job)
                 .AsQueryable();
 
+            // Account filter
             if (accountId.HasValue)
                 query = query.Where(i => i.AccountId == accountId);
+            else
+            {
+                // Get user's account if not specified
+                var userIdClaim = User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+                if (Guid.TryParse(userIdClaim, out var userId))
+                {
+                    var account = _context.Accounts.FirstOrDefault(a => a.OwnerId == userId);
+                    if (account != null)
+                        query = query.Where(i => i.AccountId == account.Id);
+                }
+            }
 
+            // Status filter
             if (!string.IsNullOrEmpty(status))
                 query = query.Where(i => i.Status == status);
 
-            return Ok(await query.OrderByDescending(i => i.InvoiceDate).ToListAsync());
+            // Full-text search on invoice number, customer name, amount
+            if (!string.IsNullOrEmpty(search))
+            {
+                var searchLower = search.ToLower();
+                query = query.Where(i =>
+                    i.InvoiceNumber.ToLower().Contains(searchLower) ||
+                    i.Customer.FirstName.ToLower().Contains(searchLower) ||
+                    i.Customer.LastName.ToLower().Contains(searchLower) ||
+                    i.TotalAmount.ToString().Contains(search)
+                );
+            }
+
+            // Date range filter
+            if (startDate.HasValue)
+                query = query.Where(i => i.InvoiceDate >= startDate);
+
+            if (endDate.HasValue)
+                query = query.Where(i => i.InvoiceDate <= endDate);
+
+            return Ok(await query
+                .OrderByDescending(i => i.InvoiceDate)
+                .Skip(offset)
+                .Take(limit)
+                .ToListAsync());
         }
 
         [HttpGet("{id}")]

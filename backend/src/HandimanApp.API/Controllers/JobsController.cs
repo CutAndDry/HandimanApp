@@ -21,14 +21,55 @@ public class JobsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Job>>> GetJobs()
+    public async Task<ActionResult<IEnumerable<Job>>> GetJobs(
+        [FromQuery] string? status = null,
+        [FromQuery] Guid? customerId = null,
+        [FromQuery] string? search = null,
+        [FromQuery] DateTime? startDate = null,
+        [FromQuery] DateTime? endDate = null,
+        [FromQuery] int limit = 50,
+        [FromQuery] int offset = 0)
     {
         try
         {
-            var jobs = await _context.Jobs
+            var query = _context.Jobs
                 .Include(j => j.Customer)
                 .Include(j => j.Materials)
+                .AsQueryable();
+
+            // Filter by status
+            if (!string.IsNullOrEmpty(status))
+                query = query.Where(j => j.Status == status);
+
+            // Filter by customer
+            if (customerId.HasValue)
+                query = query.Where(j => j.CustomerId == customerId);
+
+            // Search by job title, description, or customer name
+            if (!string.IsNullOrEmpty(search))
+            {
+                var searchLower = search.ToLower();
+                query = query.Where(j => 
+                    j.Title.ToLower().Contains(searchLower) ||
+                    j.Description.ToLower().Contains(searchLower) ||
+                    j.Customer.FirstName.ToLower().Contains(searchLower) ||
+                    j.Customer.LastName.ToLower().Contains(searchLower)
+                );
+            }
+
+            // Filter by date range
+            if (startDate.HasValue)
+                query = query.Where(j => j.ScheduledDate >= startDate);
+
+            if (endDate.HasValue)
+                query = query.Where(j => j.ScheduledDate <= endDate);
+
+            var jobs = await query
+                .OrderByDescending(j => j.CreatedAt)
+                .Skip(offset)
+                .Take(limit)
                 .ToListAsync();
+
             return Ok(jobs);
         }
         catch (Exception ex)
