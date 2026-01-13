@@ -1,17 +1,30 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { authService } from '@/services/authService'
 import '../styles/auth.css'
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
     setLoading(true)
-    // TODO: Call login API
-    console.log('Login:', { email, password })
-    setLoading(false)
+
+    try {
+      await authService.login(email, password)
+      navigate('/dashboard')
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.message || err.message || 'Login failed. Please try again.'
+      setError(errorMessage)
+      console.error('Login error:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -23,6 +36,8 @@ const LoginPage: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
+          {error && <div className="form-error">{error}</div>}
+
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input

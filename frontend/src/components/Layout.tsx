@@ -44,6 +44,10 @@ const Layout: React.FC = () => {
               <span className="nav-icon">💰</span>
               <span className="nav-text">Invoices</span>
             </Link>
+            <Link to="/customers" className={`nav-item ${isActive('/customers') ? 'active' : ''}`}>
+              <span className="nav-icon">👥</span>
+              <span className="nav-text">Customers</span>
+            </Link>
             <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`}>
               <span className="nav-icon">⚙️</span>
               <span className="nav-text">Settings</span>

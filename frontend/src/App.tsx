@@ -5,8 +5,10 @@ import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import DashboardPage from './pages/DashboardPage'
 import JobsPage from './pages/JobsPage'
+import JobDetailPage from './pages/JobDetailPage'
 import CalendarPage from './pages/CalendarPage'
 import InvoicesPage from './pages/InvoicesPage'
+import CustomerPage from './pages/CustomerPage'
 import SettingsPage from './pages/SettingsPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
@@ -24,8 +26,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/jobs/:id" element={<JobDetailPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/invoices" element={<InvoicesPage />} />
+            <Route path="/customers" element={<CustomerPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           
