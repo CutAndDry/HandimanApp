@@ -39,6 +39,7 @@ const Layout: React.FC = () => {
             </div>
 
             <nav className="sidebar-nav">
+              {/* Main Features */}
               <Link to="/dashboard" className={`nav-item ${isActive('/dashboard') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.BarChart className="nav-icon" />
                 <span className="nav-text">Dashboard</span>
@@ -59,27 +60,20 @@ const Layout: React.FC = () => {
                 <Icons.Users className="nav-icon" />
                 <span className="nav-text">Customers</span>
               </Link>
-              
-              {/* Phase 1 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 1</span>
-              </div>
               <Link to="/bookings" className={`nav-item ${isActive('/bookings') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Calendar className="nav-icon" />
                 <span className="nav-text">Bookings</span>
               </Link>
               <Link to="/leads" className={`nav-item ${isActive('/leads') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Users className="nav-icon" />
+                <Icons.TrendingUp className="nav-icon" />
                 <span className="nav-text">Leads</span>
               </Link>
 
-              {/* Phase 2 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 2</span>
-              </div>
+              {/* Operations */}
+              <div className="nav-divider"></div>
               <Link to="/scheduling" className={`nav-item ${isActive('/scheduling') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Calendar className="nav-icon" />
-                <span className="nav-text">Smart Scheduling</span>
+                <span className="nav-text">Scheduling</span>
               </Link>
               <Link to="/service-areas" className={`nav-item ${isActive('/service-areas') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.MapPin className="nav-icon" />
@@ -89,11 +83,17 @@ const Layout: React.FC = () => {
                 <Icons.Users className="nav-icon" />
                 <span className="nav-text">Technicians</span>
               </Link>
+              <Link to="/time-entries" className={`nav-item ${isActive('/time-entries') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Clock className="nav-icon" />
+                <span className="nav-text">Time Entries</span>
+              </Link>
+              <Link to="/photos" className={`nav-item ${isActive('/photos') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Camera className="nav-icon" />
+                <span className="nav-text">Photos</span>
+              </Link>
 
-              {/* Phase 3 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 3</span>
-              </div>
+              {/* Financial */}
+              <div className="nav-divider"></div>
               <Link to="/payments" className={`nav-item ${isActive('/payments') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.DollarSign className="nav-icon" />
                 <span className="nav-text">Payments</span>
@@ -102,75 +102,55 @@ const Layout: React.FC = () => {
                 <Icons.TrendingDown className="nav-icon" />
                 <span className="nav-text">Job Costing</span>
               </Link>
-
-              {/* Phase 4 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 4</span>
-              </div>
-              <Link to="/notifications" className={`nav-item ${isActive('/notifications') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Bell className="nav-icon" />
-                <span className="nav-text">Notifications</span>
-              </Link>
-              <Link to="/reviews" className={`nav-item ${isActive('/reviews') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Star className="nav-icon" />
-                <span className="nav-text">Reviews</span>
-              </Link>
-              <Link to="/messages" className={`nav-item ${isActive('/messages') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.MessageSquare className="nav-icon" />
-                <span className="nav-text">Messages</span>
-              </Link>
-
-              {/* Phase 5 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 5</span>
-              </div>
-              <Link to="/time-entries" className={`nav-item ${isActive('/time-entries') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Clock className="nav-icon" />
-                <span className="nav-text">Time Entries</span>
-              </Link>
-              <Link to="/photos" className={`nav-item ${isActive('/photos') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Camera className="nav-icon" />
-                <span className="nav-text">Job Photos</span>
-              </Link>
               <Link to="/inventory" className={`nav-item ${isActive('/inventory') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Package className="nav-icon" />
                 <span className="nav-text">Inventory</span>
               </Link>
 
-              {/* Phase 6 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 6</span>
-              </div>
-              <Link to="/automation" className={`nav-item ${isActive('/automation') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Zap className="nav-icon" />
-                <span className="nav-text">Automation</span>
+              {/* Communication & Analytics */}
+              <div className="nav-divider"></div>
+              <Link to="/notifications" className={`nav-item ${isActive('/notifications') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Bell className="nav-icon" />
+                <span className="nav-text">Notifications</span>
               </Link>
-              <Link to="/pricing" className={`nav-item ${isActive('/pricing') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.TrendingUp className="nav-icon" />
-                <span className="nav-text">Pricing</span>
+              <Link to="/messages" className={`nav-item ${isActive('/messages') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.MessageSquare className="nav-icon" />
+                <span className="nav-text">Messages</span>
+              </Link>
+              <Link to="/reviews" className={`nav-item ${isActive('/reviews') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Star className="nav-icon" />
+                <span className="nav-text">Reviews</span>
               </Link>
               <Link to="/analytics" className={`nav-item ${isActive('/analytics') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.BarChart3 className="nav-icon" />
                 <span className="nav-text">Analytics</span>
               </Link>
 
-              {/* Phase 7 Features */}
-              <div className="nav-divider">
-                <span className="nav-divider-text">Phase 7</span>
-              </div>
+              {/* Business Tools */}
+              <div className="nav-divider"></div>
+              <Link to="/pricing" className={`nav-item ${isActive('/pricing') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.TrendingUp className="nav-icon" />
+                <span className="nav-text">Dynamic Pricing</span>
+              </Link>
+              <Link to="/automation" className={`nav-item ${isActive('/automation') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Zap className="nav-icon" />
+                <span className="nav-text">Automation</span>
+              </Link>
+
+              {/* Admin */}
+              <div className="nav-divider"></div>
               <Link to="/teams" className={`nav-item ${isActive('/teams') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Users className="nav-icon" />
                 <span className="nav-text">Teams</span>
               </Link>
               <Link to="/roles" className={`nav-item ${isActive('/roles') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Shield className="nav-icon" />
-                <span className="nav-text">Roles & Permissions</span>
+                <span className="nav-text">Roles</span>
               </Link>
               <Link to="/integrations" className={`nav-item ${isActive('/integrations') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Plug className="nav-icon" />
                 <span className="nav-text">Integrations</span>
               </Link>
-              
               <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Settings className="nav-icon" />
                 <span className="nav-text">Settings</span>
