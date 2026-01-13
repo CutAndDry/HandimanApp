@@ -102,6 +102,23 @@ const Layout: React.FC = () => {
                 <Icons.TrendingDown className="nav-icon" />
                 <span className="nav-text">Job Costing</span>
               </Link>
+
+              {/* Phase 4 Features */}
+              <div className="nav-divider">
+                <span className="nav-divider-text">Phase 4</span>
+              </div>
+              <Link to="/notifications" className={`nav-item ${isActive('/notifications') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Bell className="nav-icon" />
+                <span className="nav-text">Notifications</span>
+              </Link>
+              <Link to="/reviews" className={`nav-item ${isActive('/reviews') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.Star className="nav-icon" />
+                <span className="nav-text">Reviews</span>
+              </Link>
+              <Link to="/messages" className={`nav-item ${isActive('/messages') ? 'active' : ''}`} onClick={closeSidebar}>
+                <Icons.MessageSquare className="nav-icon" />
+                <span className="nav-text">Messages</span>
+              </Link>
               
               <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`} onClick={closeSidebar}>
                 <Icons.Settings className="nav-icon" />

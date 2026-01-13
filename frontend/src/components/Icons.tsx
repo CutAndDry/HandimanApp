@@ -114,4 +114,23 @@ export const Icons = {
       <polyline points="17 18 23 18 23 12" />
     </svg>
   ),
+
+  Bell: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+    </svg>
+  ),
+
+  Star: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <polygon points="12 2 15.09 10.26 23.77 11.35 17.88 17.14 19.54 25.85 12 21.77 4.46 25.85 6.12 17.14 0.23 11.35 8.91 10.26 12 2" />
+    </svg>
+  ),
+
+  MessageSquare: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
 }

@@ -20,6 +20,9 @@ import MapServiceAreasPage from './pages/MapServiceAreasPage'
 import TechnicianManagementPage from './pages/TechnicianManagementPage'
 import { PaymentsPage } from './pages/PaymentsPage'
 import { JobCostingPage } from './pages/JobCostingPage'
+import NotificationsPage from './pages/NotificationsPage'
+import ReviewsPage from './pages/ReviewsPage'
+import ChatPage from './pages/ChatPage'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -46,6 +49,9 @@ function App() {
             <Route path="/technicians" element={<TechnicianManagementPage />} />
             <Route path="/payments" element={<PaymentsPage />} />
             <Route path="/job-costing" element={<JobCostingPage />} />
+            <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/messages" element={<ChatPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           
