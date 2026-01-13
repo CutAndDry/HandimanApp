@@ -331,3 +331,21 @@ public class PaymentMethod
     
     public Customer? Customer { get; set; }
 }
+
+// Phase 2: Service Areas (for map-based routing & service coverage)
+public class ServiceArea
+{
+    public Guid Id { get; set; }
+    public Guid AccountId { get; set; }
+    public string City { get; set; } = string.Empty;
+    public string State { get; set; } = string.Empty;
+    public string ZipCode { get; set; } = string.Empty;
+    public int Radius { get; set; } = 15; // miles
+    public double Latitude { get; set; } = 0;
+    public double Longitude { get; set; } = 0;
+    public bool IsActive { get; set; } = true;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
+    
+    public Account? Account { get; set; }
+}

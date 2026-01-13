@@ -29,6 +29,7 @@ public class ApplicationDbContext : DbContext
     // Phase 2: Scheduling & Skills
     public DbSet<TechnicianSkill> TechnicianSkills { get; set; } = null!;
     public DbSet<JobTemplate> JobTemplates { get; set; } = null!;
+    public DbSet<ServiceArea> ServiceAreas { get; set; } = null!;
 
     // Phase 3: Financial
     public DbSet<RecurringService> RecurringServices { get; set; } = null!;
