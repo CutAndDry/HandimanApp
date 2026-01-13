@@ -4,8 +4,10 @@ import { Job } from '@/types'
 export type { Job }
 
 export const jobService = {
-  getJobs: async () => {
-    const response = await api.get<Job[]>('/api/jobs')
+  getJobs: async (status?: string, search?: string, limit: number = 50, offset: number = 0) => {
+    const response = await api.get<Job[]>('/api/jobs', {
+      params: { status, search, limit, offset },
+    })
     return response.data
   },
 

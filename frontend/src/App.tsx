@@ -12,6 +12,9 @@ import CustomerPage from './pages/CustomerPage'
 import SettingsPage from './pages/SettingsPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
+import OnlineBookingPage from './pages/OnlineBookingPage'
+import LeadPipelinePage from './pages/LeadPipelinePage'
+import CustomerPortalPage from './pages/CustomerPortalPage'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/invoices" element={<InvoicesPage />} />
             <Route path="/customers" element={<CustomerPage />} />
+            <Route path="/customers/:customerId/portal" element={<CustomerPortalPage />} />
+            <Route path="/bookings" element={<OnlineBookingPage />} />
+            <Route path="/leads" element={<LeadPipelinePage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           
