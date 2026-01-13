@@ -5,14 +5,35 @@ import { logout } from '../store/authSlice'
 import { Icons } from './Icons'
 import './Layout.css'
 
+interface NavGroup {
+  title: string
+  icon: React.ReactNode
+  items: Array<{
+    path: string
+    label: string
+    icon: React.ReactNode
+  }>
+}
+
 const Layout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(['main-features']))
   const location = useLocation()
   const dispatch = useAppDispatch()
   const { isAuthenticated, user } = useAppSelector((state) => state.auth)
 
   const handleLogout = () => {
     dispatch(logout())
+  }
+
+  const toggleGroup = (groupId: string) => {
+    const newExpanded = new Set(expandedGroups)
+    if (newExpanded.has(groupId)) {
+      newExpanded.delete(groupId)
+    } else {
+      newExpanded.add(groupId)
+    }
+    setExpandedGroups(newExpanded)
   }
 
   const isActive = (path: string) => location.pathname === path
@@ -22,6 +43,70 @@ const Layout: React.FC = () => {
       setSidebarOpen(false)
     }
   }
+
+  const navGroups: NavGroup[] = [
+    {
+      title: 'Main Features',
+      icon: <Icons.Home className="group-icon" />,
+      items: [
+        { path: '/dashboard', label: 'Dashboard', icon: <Icons.BarChart /> },
+        { path: '/jobs', label: 'Jobs', icon: <Icons.Wrench /> },
+        { path: '/calendar', label: 'Calendar', icon: <Icons.Calendar /> },
+        { path: '/invoices', label: 'Invoices', icon: <Icons.FileText /> },
+        { path: '/customers', label: 'Customers', icon: <Icons.Users /> },
+        { path: '/bookings', label: 'Bookings', icon: <Icons.Calendar /> },
+        { path: '/leads', label: 'Leads', icon: <Icons.TrendingUp /> },
+      ]
+    },
+    {
+      title: 'Operations',
+      icon: <Icons.Wrench className="group-icon" />,
+      items: [
+        { path: '/scheduling', label: 'Scheduling', icon: <Icons.Calendar /> },
+        { path: '/service-areas', label: 'Service Areas', icon: <Icons.MapPin /> },
+        { path: '/technicians', label: 'Technicians', icon: <Icons.Users /> },
+        { path: '/time-entries', label: 'Time Entries', icon: <Icons.Clock /> },
+        { path: '/photos', label: 'Photos', icon: <Icons.Camera /> },
+      ]
+    },
+    {
+      title: 'Financial',
+      icon: <Icons.DollarSign className="group-icon" />,
+      items: [
+        { path: '/payments', label: 'Payments', icon: <Icons.CreditCard /> },
+        { path: '/job-costing', label: 'Job Costing', icon: <Icons.TrendingDown /> },
+        { path: '/inventory', label: 'Inventory', icon: <Icons.Package /> },
+      ]
+    },
+    {
+      title: 'Analytics',
+      icon: <Icons.BarChart3 className="group-icon" />,
+      items: [
+        { path: '/notifications', label: 'Notifications', icon: <Icons.Bell /> },
+        { path: '/messages', label: 'Messages', icon: <Icons.MessageSquare /> },
+        { path: '/reviews', label: 'Reviews', icon: <Icons.Star /> },
+        { path: '/analytics', label: 'Analytics', icon: <Icons.BarChart3 /> },
+      ]
+    },
+    {
+      title: 'Business Tools',
+      icon: <Icons.Zap className="group-icon" />,
+      items: [
+        { path: '/pricing', label: 'Dynamic Pricing', icon: <Icons.TrendingUp /> },
+        { path: '/automation', label: 'Automation', icon: <Icons.Zap /> },
+      ]
+    },
+    {
+      title: 'Admin',
+      icon: <Icons.Settings className="group-icon" />,
+      items: [
+        { path: '/teams', label: 'Teams', icon: <Icons.Users /> },
+        { path: '/roles', label: 'Roles', icon: <Icons.Shield /> },
+        { path: '/integrations', label: 'Integrations', icon: <Icons.Plug /> },
+        { path: '/settings', label: 'Settings', icon: <Icons.Settings /> },
+      ]
+    },
+  ]
 
   return (
     <div className="layout">
@@ -39,122 +124,37 @@ const Layout: React.FC = () => {
             </div>
 
             <nav className="sidebar-nav">
-              {/* Main Features */}
-              <Link to="/dashboard" className={`nav-item ${isActive('/dashboard') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.BarChart className="nav-icon" />
-                <span className="nav-text">Dashboard</span>
-              </Link>
-              <Link to="/jobs" className={`nav-item ${isActive('/jobs') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Wrench className="nav-icon" />
-                <span className="nav-text">Jobs</span>
-              </Link>
-              <Link to="/calendar" className={`nav-item ${isActive('/calendar') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Calendar className="nav-icon" />
-                <span className="nav-text">Calendar</span>
-              </Link>
-              <Link to="/invoices" className={`nav-item ${isActive('/invoices') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.FileText className="nav-icon" />
-                <span className="nav-text">Invoices</span>
-              </Link>
-              <Link to="/customers" className={`nav-item ${isActive('/customers') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Users className="nav-icon" />
-                <span className="nav-text">Customers</span>
-              </Link>
-              <Link to="/bookings" className={`nav-item ${isActive('/bookings') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Calendar className="nav-icon" />
-                <span className="nav-text">Bookings</span>
-              </Link>
-              <Link to="/leads" className={`nav-item ${isActive('/leads') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.TrendingUp className="nav-icon" />
-                <span className="nav-text">Leads</span>
-              </Link>
-
-              {/* Operations */}
-              <div className="nav-divider"></div>
-              <Link to="/scheduling" className={`nav-item ${isActive('/scheduling') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Calendar className="nav-icon" />
-                <span className="nav-text">Scheduling</span>
-              </Link>
-              <Link to="/service-areas" className={`nav-item ${isActive('/service-areas') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.MapPin className="nav-icon" />
-                <span className="nav-text">Service Areas</span>
-              </Link>
-              <Link to="/technicians" className={`nav-item ${isActive('/technicians') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Users className="nav-icon" />
-                <span className="nav-text">Technicians</span>
-              </Link>
-              <Link to="/time-entries" className={`nav-item ${isActive('/time-entries') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Clock className="nav-icon" />
-                <span className="nav-text">Time Entries</span>
-              </Link>
-              <Link to="/photos" className={`nav-item ${isActive('/photos') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Camera className="nav-icon" />
-                <span className="nav-text">Photos</span>
-              </Link>
-
-              {/* Financial */}
-              <div className="nav-divider"></div>
-              <Link to="/payments" className={`nav-item ${isActive('/payments') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.DollarSign className="nav-icon" />
-                <span className="nav-text">Payments</span>
-              </Link>
-              <Link to="/job-costing" className={`nav-item ${isActive('/job-costing') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.TrendingDown className="nav-icon" />
-                <span className="nav-text">Job Costing</span>
-              </Link>
-              <Link to="/inventory" className={`nav-item ${isActive('/inventory') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Package className="nav-icon" />
-                <span className="nav-text">Inventory</span>
-              </Link>
-
-              {/* Communication & Analytics */}
-              <div className="nav-divider"></div>
-              <Link to="/notifications" className={`nav-item ${isActive('/notifications') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Bell className="nav-icon" />
-                <span className="nav-text">Notifications</span>
-              </Link>
-              <Link to="/messages" className={`nav-item ${isActive('/messages') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.MessageSquare className="nav-icon" />
-                <span className="nav-text">Messages</span>
-              </Link>
-              <Link to="/reviews" className={`nav-item ${isActive('/reviews') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Star className="nav-icon" />
-                <span className="nav-text">Reviews</span>
-              </Link>
-              <Link to="/analytics" className={`nav-item ${isActive('/analytics') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.BarChart3 className="nav-icon" />
-                <span className="nav-text">Analytics</span>
-              </Link>
-
-              {/* Business Tools */}
-              <div className="nav-divider"></div>
-              <Link to="/pricing" className={`nav-item ${isActive('/pricing') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.TrendingUp className="nav-icon" />
-                <span className="nav-text">Dynamic Pricing</span>
-              </Link>
-              <Link to="/automation" className={`nav-item ${isActive('/automation') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Zap className="nav-icon" />
-                <span className="nav-text">Automation</span>
-              </Link>
-
-              {/* Admin */}
-              <div className="nav-divider"></div>
-              <Link to="/teams" className={`nav-item ${isActive('/teams') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Users className="nav-icon" />
-                <span className="nav-text">Teams</span>
-              </Link>
-              <Link to="/roles" className={`nav-item ${isActive('/roles') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Shield className="nav-icon" />
-                <span className="nav-text">Roles</span>
-              </Link>
-              <Link to="/integrations" className={`nav-item ${isActive('/integrations') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Plug className="nav-icon" />
-                <span className="nav-text">Integrations</span>
-              </Link>
-              <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`} onClick={closeSidebar}>
-                <Icons.Settings className="nav-icon" />
-                <span className="nav-text">Settings</span>
-              </Link>
+              {navGroups.map((group, idx) => {
+                const groupId = `group-${idx}`
+                const isExpanded = expandedGroups.has(groupId)
+                return (
+                  <div key={groupId} className="nav-group">
+                    <button
+                      className="nav-group-header"
+                      onClick={() => toggleGroup(groupId)}
+                    >
+                      {group.icon}
+                      <span className="group-title">{group.title}</span>
+                      <Icons.ChevronDown className={`chevron ${isExpanded ? 'expanded' : ''}`} />
+                    </button>
+                    {isExpanded && (
+                      <div className="nav-group-items">
+                        {group.items.map((item) => (
+                          <Link
+                            key={item.path}
+                            to={item.path}
+                            className={`nav-item ${isActive(item.path) ? 'active' : ''}`}
+                            onClick={closeSidebar}
+                          >
+                            <span className="nav-icon">{item.icon}</span>
+                            <span className="nav-text">{item.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </nav>
 
             <div className="sidebar-footer">

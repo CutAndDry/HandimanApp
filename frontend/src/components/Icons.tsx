@@ -48,6 +48,13 @@ export const Icons = {
       <line x1="6" y1="20" x2="6" y2="16" />
     </svg>
   ),
+
+  CreditCard: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+      <line x1="1" y1="10" x2="23" y2="10" />
+    </svg>
+  ),
   
   Settings: (props: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
@@ -182,6 +189,19 @@ export const Icons = {
       <circle cx="12" cy="2" r="1" />
       <path d="M5 7c-1.657 0-3 1.343-3 3v1c0 1.657 1.343 3 3 3h1v3c0 1.657 1.343 3 3 3s3-1.343 3-3v-3h2v3c0 1.657 1.343 3 3 3s3-1.343 3-3v-3h1c1.657 0 3-1.343 3-3V10c0-1.657-1.343-3-3-3" />
       <line x1="12" y1="20" x2="12" y2="23" />
+    </svg>
+  ),
+
+  ChevronDown: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-5 h-5"}>
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  ),
+
+  Home: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
     </svg>
   ),
 }
