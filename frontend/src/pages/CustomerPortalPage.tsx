@@ -1,9 +1,42 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+interface PortalData {
+  customer: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+  };
+  activeJobs: Array<{
+    id: string;
+    title: string;
+    status: string;
+    scheduledDate: string;
+  }>;
+  recentInvoices: Array<{
+    id: string;
+    number: string;
+    total: number;
+    status: string;
+    createdAt: string;
+  }>;
+  serviceHistory: Array<{
+    serviceType: string;
+    cost: number;
+    serviceDate: string;
+  }>;
+  statistics: {
+    totalJobs: number;
+    totalInvoiced: number;
+    pendingInvoices: number;
+  };
+}
+
 export default function CustomerPortalPage() {
   const { customerId } = useParams();
-  const [portalData, setPortalData] = useState(null);
+  const [portalData, setPortalData] = useState<PortalData | null>(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
   const [bookingForm, setBookingForm] = useState({
@@ -12,13 +45,7 @@ export default function CustomerPortalPage() {
     scheduledDate: '',
     accountId: localStorage.getItem('accountId') || ''
   });
-  const [reviewForm, setReviewForm] = useState({
-    jobId: '',
-    rating: 5,
-    reviewText: ''
-  });
   const [showBookingForm, setShowBookingForm] = useState(false);
-  const [showReviewForm, setShowReviewForm] = useState(false);
 
   useEffect(() => {
     fetchPortalData();
@@ -40,17 +67,12 @@ export default function CustomerPortalPage() {
     }
   };
 
-  const handleBookingInputChange = (e) => {
+  const handleBookingInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setBookingForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleReviewInputChange = (e) => {
-    const { name, value } = e.target;
-    setReviewForm(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmitBooking = async (e) => {
+  const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await fetch(
@@ -73,33 +95,10 @@ export default function CustomerPortalPage() {
     }
   };
 
-  const handleSubmitReview = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch(
-        `http://localhost:5000/api/customerportal/customer/${customerId}/submit-review`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(reviewForm)
-        }
-      );
-      if (res.ok) {
-        setReviewForm({ jobId: '', rating: 5, reviewText: '' });
-        setShowReviewForm(false);
-        fetchPortalData();
-        alert('Review submitted successfully!');
-      }
-    } catch (error) {
-      console.error('Error submitting review:', error);
-      alert('Error submitting review');
-    }
-  };
-
   if (loading) return <div className="text-center py-8 text-gray-500">Loading...</div>;
   if (!portalData) return <div className="text-center py-8 text-gray-500">Customer not found</div>;
 
-  const { customer, activeJobs, recentInvoices, serviceHistory, bookings, statistics } = portalData;
+  const { customer, activeJobs, recentInvoices, serviceHistory, statistics } = portalData;
 
   return (
     <div className="space-y-6">
@@ -169,7 +168,7 @@ export default function CustomerPortalPage() {
               placeholder="Service Description"
               value={bookingForm.description}
               onChange={handleBookingInputChange}
-              rows="3"
+              rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             ></textarea>
             <div className="flex gap-2">
@@ -241,7 +240,7 @@ export default function CustomerPortalPage() {
                 {recentInvoices.map(invoice => (
                   <div key={invoice.id} className="p-3 bg-gray-50 rounded">
                     <div className="flex justify-between items-center">
-                      <p className="font-medium text-gray-900">#{invoice.invoiceNumber}</p>
+                      <p className="font-medium text-gray-900">#{invoice.number}</p>
                       <p className="font-bold text-gray-900">${invoice.total.toFixed(2)}</p>
                     </div>
                     <p className="text-sm text-gray-600">{invoice.status}</p>
@@ -264,7 +263,6 @@ export default function CustomerPortalPage() {
               {activeJobs.map(job => (
                 <div key={job.id} className="p-4 border border-gray-200 rounded">
                   <h4 className="font-semibold text-gray-900">{job.title}</h4>
-                  <p className="text-gray-600 text-sm mt-1">{job.description}</p>
                   <div className="flex justify-between items-center mt-2">
                     <span className="text-sm text-gray-500">{job.status}</span>
                     <span className="text-sm text-gray-500">
@@ -296,7 +294,7 @@ export default function CustomerPortalPage() {
               <tbody>
                 {recentInvoices.map(invoice => (
                   <tr key={invoice.id} className="border-b hover:bg-gray-50">
-                    <td className="py-2">#{invoice.invoiceNumber}</td>
+                    <td className="py-2">#{invoice.number}</td>
                     <td className="py-2">${invoice.total.toFixed(2)}</td>
                     <td className="py-2 text-sm">{invoice.status}</td>
                   </tr>

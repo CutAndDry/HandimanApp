@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Truck, Home, TrendingUp } from 'lucide-react';
+import { Truck, Home, TrendingUp, MapPin } from 'lucide-react';
 
 interface ServiceArea {
   city: string;

@@ -71,12 +71,12 @@ export default function LeadPipelinePage() {
     fetchSummary();
   }, [selectedStatus]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await fetch('http://localhost:5000/api/leads', {
@@ -103,8 +103,8 @@ export default function LeadPipelinePage() {
     }
   };
 
-  const getStatusColor = (status) => {
-    const colors = {
+  const getStatusColor = (status: string): string => {
+    const colors: Record<string, string> = {
       new: 'bg-blue-100 text-blue-800',
       contacted: 'bg-purple-100 text-purple-800',
       quoted: 'bg-yellow-100 text-yellow-800',
@@ -131,7 +131,7 @@ export default function LeadPipelinePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-gray-600 text-sm">Total Leads</p>
-            <p className="text-3xl font-bold text-blue-600">{summary.total}</p>
+            <p className="text-3xl font-bold text-blue-600">{summary.total_leads}</p>
           </div>
           <div className="bg-green-50 p-4 rounded-lg">
             <p className="text-gray-600 text-sm">Won Deals</p>
@@ -175,7 +175,7 @@ export default function LeadPipelinePage() {
               placeholder="Notes"
               value={formData.notes}
               onChange={handleInputChange}
-              rows="3"
+              rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             ></textarea>
             <div className="flex gap-2">

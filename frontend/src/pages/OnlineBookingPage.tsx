@@ -157,7 +157,7 @@ export default function OnlineBookingPage() {
               placeholder="Service Description"
               value={formData.description}
               onChange={handleInputChange}
-              rows="4"
+              rows={4}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             ></textarea>
             <div className="flex gap-2">
