@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../hooks/useRedux'
 import { logout } from '../store/authSlice'
+import { Icons } from './Icons'
 import './Layout.css'
 
 const Layout: React.FC = () => {
@@ -23,33 +24,33 @@ const Layout: React.FC = () => {
           <div className="sidebar-header">
             <h2>HandimanApp</h2>
             <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
-              ☰
+              <Icons.Menu className="sidebar-menu-icon" />
             </button>
           </div>
 
           <nav className="sidebar-nav">
             <Link to="/dashboard" className={`nav-item ${isActive('/dashboard') ? 'active' : ''}`}>
-              <span className="nav-icon">📊</span>
+              <Icons.BarChart className="nav-icon" />
               <span className="nav-text">Dashboard</span>
             </Link>
             <Link to="/jobs" className={`nav-item ${isActive('/jobs') ? 'active' : ''}`}>
-              <span className="nav-icon">🔧</span>
+              <Icons.Wrench className="nav-icon" />
               <span className="nav-text">Jobs</span>
             </Link>
             <Link to="/calendar" className={`nav-item ${isActive('/calendar') ? 'active' : ''}`}>
-              <span className="nav-icon">📅</span>
+              <Icons.Calendar className="nav-icon" />
               <span className="nav-text">Calendar</span>
             </Link>
             <Link to="/invoices" className={`nav-item ${isActive('/invoices') ? 'active' : ''}`}>
-              <span className="nav-icon">💰</span>
+              <Icons.FileText className="nav-icon" />
               <span className="nav-text">Invoices</span>
             </Link>
             <Link to="/customers" className={`nav-item ${isActive('/customers') ? 'active' : ''}`}>
-              <span className="nav-icon">👥</span>
+              <Icons.Users className="nav-icon" />
               <span className="nav-text">Customers</span>
             </Link>
             <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`}>
-              <span className="nav-icon">⚙️</span>
+              <Icons.Settings className="nav-icon" />
               <span className="nav-text">Settings</span>
             </Link>
           </nav>
@@ -62,6 +63,7 @@ const Layout: React.FC = () => {
               </div>
             </div>
             <button className="logout-btn" onClick={handleLogout}>
+              <Icons.LogOut className="logout-icon" />
               Logout
             </button>
           </div>
