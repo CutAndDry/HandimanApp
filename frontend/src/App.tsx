@@ -26,6 +26,9 @@ import ChatPage from './pages/ChatPage'
 import TimeEntriesPage from './pages/TimeEntriesPage'
 import PhotosPage from './pages/PhotosPage'
 import InventoryPage from './pages/InventoryPage'
+import AutomationPage from './pages/AutomationPage'
+import DynamicPricingPage from './pages/DynamicPricingPage'
+import AnalyticsPage from './pages/AnalyticsPage'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -58,6 +61,9 @@ function App() {
             <Route path="/time-entries" element={<TimeEntriesPage />} />
             <Route path="/photos" element={<PhotosPage />} />
             <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/automation" element={<AutomationPage />} />
+            <Route path="/pricing" element={<DynamicPricingPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           

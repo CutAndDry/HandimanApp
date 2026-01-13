@@ -156,4 +156,18 @@ export const Icons = {
       <line x1="18" y1="20" x2="18" y2="4" />
       <line x1="6" y1="20" x2="6" y2="14" />
     </svg>
-  ),}
+  ),
+
+  Zap: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  ),
+
+  TrendingUp: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 17" />
+      <polyline points="17 6 23 6 23 12" />
+    </svg>
+  ),
+}
