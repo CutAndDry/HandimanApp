@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { customerService } from '@/services/customerService';
+import { Icons } from '@/components/Icons';
 import type { Customer } from '@/types';
 
 const CustomerPage: React.FC = () => {
@@ -252,7 +253,7 @@ const CustomerPage: React.FC = () => {
           <div className="bg-white rounded-lg shadow overflow-hidden">
             {customers.length === 0 ? (
               <div className="p-8 sm:p-12 text-center">
-                <div className="text-4xl sm:text-5xl mb-4">👥</div>
+                <Icons.Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-600 mb-4">No customers yet. Create one to get started!</p>
               </div>
             ) : (

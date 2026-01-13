@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { dashboardService } from '@/services/dashboardService'
+import { Icons } from '@/components/Icons'
 import '../styles/dashboard.css'
 
 const DashboardPage: React.FC = () => {
@@ -41,10 +42,10 @@ const DashboardPage: React.FC = () => {
   }
 
   const statCards = [
-    { icon: '🔧', title: 'Total Jobs', value: stats.totalJobs, change: '+12%' },
-    { icon: '💰', title: 'Revenue', value: `$${stats.totalRevenue.toFixed(2)}`, change: '+8%' },
-    { icon: '📄', title: 'Pending Invoices', value: stats.pendingInvoices, change: '+3%' },
-    { icon: '⏱️', title: 'In Progress', value: stats.inProgressJobs, change: '-2%' },
+    { Icon: Icons.Wrench, title: 'Total Jobs', value: stats.totalJobs, change: '+12%' },
+    { Icon: Icons.DollarSign, title: 'Revenue', value: `$${stats.totalRevenue.toFixed(2)}`, change: '+8%' },
+    { Icon: Icons.FileText, title: 'Pending Invoices', value: stats.pendingInvoices, change: '+3%' },
+    { Icon: Icons.Clock, title: 'In Progress', value: stats.inProgressJobs, change: '-2%' },
   ]
 
   return (
@@ -58,28 +59,28 @@ const DashboardPage: React.FC = () => {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {statCards.map((stat, idx) => (
-          <div key={idx} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 sm:p-7 border border-gray-100">
+          <div key={idx} className="bg-white rounded-lg shadow hover:shadow-md transition-all duration-200 p-6 border border-gray-200">
             <div className="flex items-start justify-between mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg flex items-center justify-center text-2xl">
-                {stat.icon}
+              <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700">
+                <stat.Icon className="w-5 h-5" />
               </div>
-              <span className={`text-xs font-bold whitespace-nowrap px-3 py-1 rounded-full ${stat.change.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+              <span className={`text-xs font-semibold px-2 py-1 rounded ${stat.change.startsWith('+') ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
                 {stat.change}
               </span>
             </div>
-            <p className="text-gray-600 text-sm font-medium mb-2">{stat.title}</p>
+            <p className="text-gray-600 text-sm font-medium mb-1">{stat.title}</p>
             <p className="text-3xl sm:text-4xl font-bold text-gray-900">{stat.value}</p>
           </div>
         ))}
       </div>
 
       {/* Recent Jobs Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+      <div className="bg-white rounded-lg shadow border border-gray-200 p-6 sm:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <h2 className="text-2xl font-bold text-gray-900">Recent Jobs</h2>
-          <Link to="/jobs" className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-sm hover:gap-1 transition gap-0">
+          <Link to="/jobs" className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-sm transition">
             View All
-            <span className="ml-1">→</span>
+            <Icons.ChevronRight className="w-4 h-4 ml-1" />
           </Link>
         </div>
 
@@ -90,7 +91,7 @@ const DashboardPage: React.FC = () => {
           </div>
         ) : recentJobs.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-5xl mb-3">📋</div>
+            <Icons.Wrench className="w-12 h-12 text-gray-300 mx-auto mb-3" />
             <p className="text-gray-600 mb-4">No jobs yet. Create your first job to get started!</p>
             <Link 
               to="/jobs" 
@@ -105,16 +106,16 @@ const DashboardPage: React.FC = () => {
               <Link 
                 key={job.id}
                 to={`/jobs/${job.id}`}
-                className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+                className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded transition"
               >
                 <div>
                   <p className="font-semibold text-gray-900">{job.title}</p>
                   <p className="text-sm text-gray-600">{job.customerName || 'Unknown Customer'}</p>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                  job.status === 'in_progress' ? 'bg-blue-100 text-blue-800' :
-                  job.status === 'completed' ? 'bg-green-100 text-green-800' :
-                  'bg-yellow-100 text-yellow-800'
+                <span className={`px-3 py-1 rounded text-sm font-semibold ${
+                  job.status === 'in_progress' ? 'bg-blue-50 text-blue-700' :
+                  job.status === 'completed' ? 'bg-green-50 text-green-700' :
+                  'bg-yellow-50 text-yellow-700'
                 }`}>
                   {job.status}
                 </span>
@@ -125,11 +126,12 @@ const DashboardPage: React.FC = () => {
       </div>
 
       {/* Pending Invoices Section */}
-      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <div className="bg-white rounded-lg shadow border border-gray-200 p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6">
           <h2 className="text-xl font-bold text-gray-900">Pending Invoices</h2>
-          <Link to="/invoices" className="text-blue-600 hover:text-blue-700 font-semibold text-sm sm:text-base">
-            View All →
+          <Link to="/invoices" className="text-blue-600 hover:text-blue-700 font-semibold text-sm sm:text-base inline-flex items-center">
+            View All
+            <Icons.ChevronRight className="w-4 h-4 ml-1" />
           </Link>
         </div>
 

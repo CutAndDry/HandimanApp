@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { jobService } from '@/services/jobService';
+import { Icons } from '@/components/Icons';
 import type { Job } from '@/types';
 
 const CalendarPage: React.FC = () => {
@@ -212,7 +213,7 @@ const CalendarPage: React.FC = () => {
 
         {jobs.length === 0 && (
           <div className="text-center py-8 sm:py-12">
-            <div className="text-4xl sm:text-5xl mb-4">📅</div>
+            <Icons.Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <p className="text-sm sm:text-base text-gray-600">No jobs scheduled yet</p>
           </div>
         )}

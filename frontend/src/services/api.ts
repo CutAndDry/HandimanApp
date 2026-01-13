@@ -1,6 +1,10 @@
 import axios, { AxiosInstance } from 'axios'
 
-const API_BASE_URL = (import.meta.env as any).REACT_APP_API_BASE_URL || 'http://localhost:5000'
+// In development, use relative paths to leverage Vite's proxy
+// In production, use the configured API base URL or default to localhost:5000
+const API_BASE_URL = import.meta.env.PROD 
+  ? ((import.meta.env as any).REACT_APP_API_BASE_URL || 'http://localhost:5000')
+  : ''
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
