@@ -56,27 +56,30 @@ const DashboardPage: React.FC = () => {
       )}
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {statCards.map((stat, idx) => (
-          <div key={idx} className="bg-white rounded-lg shadow p-4 sm:p-6 hover:shadow-lg transition">
-            <div className="flex items-start justify-between mb-2 sm:mb-4">
-              <div className="text-2xl sm:text-3xl">{stat.icon}</div>
-              <span className={`text-xs sm:text-sm font-semibold whitespace-nowrap ml-2 ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+          <div key={idx} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 sm:p-7 border border-gray-100">
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg flex items-center justify-center text-2xl">
+                {stat.icon}
+              </div>
+              <span className={`text-xs font-bold whitespace-nowrap px-3 py-1 rounded-full ${stat.change.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                 {stat.change}
               </span>
             </div>
-            <p className="text-gray-600 text-xs sm:text-sm mb-1">{stat.title}</p>
-            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</p>
+            <p className="text-gray-600 text-sm font-medium mb-2">{stat.title}</p>
+            <p className="text-3xl sm:text-4xl font-bold text-gray-900">{stat.value}</p>
           </div>
         ))}
       </div>
 
       {/* Recent Jobs Section */}
-      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6">
-          <h2 className="text-xl font-bold text-gray-900">Recent Jobs</h2>
-          <Link to="/jobs" className="text-blue-600 hover:text-blue-700 font-semibold text-sm sm:text-base">
-            View All →
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <h2 className="text-2xl font-bold text-gray-900">Recent Jobs</h2>
+          <Link to="/jobs" className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-sm hover:gap-1 transition gap-0">
+            View All
+            <span className="ml-1">→</span>
           </Link>
         </div>
 
