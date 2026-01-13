@@ -50,10 +50,10 @@ public class LeadsController : ControllerBase
         }
 
         var leads = await query
+            .Include(l => l.Customer)
             .OrderByDescending(l => l.CreatedAt)
             .Skip(offset)
             .Take(limit)
-            .Include(l => l.Customer)
             .Select(l => new
             {
                 l.Id,
