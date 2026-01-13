@@ -15,6 +15,9 @@ import SignupPage from './pages/SignupPage'
 import OnlineBookingPage from './pages/OnlineBookingPage'
 import LeadPipelinePage from './pages/LeadPipelinePage'
 import CustomerPortalPage from './pages/CustomerPortalPage'
+import SchedulingPage from './pages/SchedulingPage'
+import MapServiceAreasPage from './pages/MapServiceAreasPage'
+import TechnicianManagementPage from './pages/TechnicianManagementPage'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -36,6 +39,9 @@ function App() {
             <Route path="/customers/:customerId/portal" element={<CustomerPortalPage />} />
             <Route path="/bookings" element={<OnlineBookingPage />} />
             <Route path="/leads" element={<LeadPipelinePage />} />
+            <Route path="/scheduling" element={<SchedulingPage />} />
+            <Route path="/service-areas" element={<MapServiceAreasPage />} />
+            <Route path="/technicians" element={<TechnicianManagementPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           

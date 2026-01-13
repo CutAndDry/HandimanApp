@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+interface OnlineBooking {
+  id: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  serviceType: string;
+  description: string;
+  scheduledDate: string;
+  status: string;
+  quotedPrice?: number;
+}
 
 export default function OnlineBookingPage() {
-  const navigate = useNavigate();
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState<OnlineBooking[]>([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState('all');
   const [showForm, setShowForm] = useState(false);
@@ -37,12 +47,12 @@ export default function OnlineBookingPage() {
     fetchBookings();
   }, [filter]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await fetch('http://localhost:5000/api/bookings', {
@@ -72,7 +82,7 @@ export default function OnlineBookingPage() {
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800';
       case 'confirmed': return 'bg-green-100 text-green-800';

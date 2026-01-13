@@ -1,8 +1,28 @@
 import { useState, useEffect } from 'react';
 
+interface Lead {
+  id: string;
+  customerName: string;
+  leadSource: string;
+  status: string;
+  estimatedValue?: number;
+  followUpDate?: string;
+  notes?: string;
+}
+
+interface Summary {
+  total_leads: number;
+  new_leads: number;
+  contacted: number;
+  quoted: number;
+  won: number;
+  lost: number;
+  total_value: number;
+}
+
 export default function LeadPipelinePage() {
-  const [leads, setLeads] = useState([]);
-  const [summary, setSummary] = useState(null);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [summary, setSummary] = useState<Summary | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [showForm, setShowForm] = useState(false);
