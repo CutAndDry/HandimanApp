@@ -107,4 +107,11 @@ export const Icons = {
       <circle cx="12" cy="10" r="3" />
     </svg>
   ),
+
+  TrendingDown: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className || "w-6 h-6"}>
+      <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
+      <polyline points="17 18 23 18 23 12" />
+    </svg>
+  ),
 }
